@@ -9,6 +9,9 @@ GameData yourGameData;
 string jsonString = File.ReadAllText(@fileName);
 yourGameData = JsonSerializer.Deserialize<GameData>(jsonString);
 Game yourGame = new Game(yourGameData);
+
+yourGame.Init();
+
 while (true)
 {
     yourGame.ProcessString(Console.ReadLine());

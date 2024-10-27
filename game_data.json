@@ -8,19 +8,28 @@
       "Name": "Starting Room",
       "Reference": "starting_room",
       "Description": "You are standing in an empty room, perfect for starting. There is a door to the north.",
-      "Directions": ["living_room", "0", "0", "0"]
+      "North": "living_room",
+      "East": "0",
+      "South": "0",
+      "West": "0"
     },
     {
       "Name": "Living Room",
       "Reference": "living_room",
       "Description": "You are standing in a place where people live, I guess.",
-      "Directions": [ "0", "0", "0", "0" ]
+      "North": "0",
+      "East": "0",
+      "South": "0",
+      "West": "0"
     },
     {
       "Name": "Dining Room",
       "Reference": "dining_room",
       "Description": "You are standing in a dining for rooms",
-      "Directions": [ "0", "0", "0", "0" ]
+      "North": "0",
+      "East": "0",
+      "South": "0",
+      "West": "0"
     }
   ]
 }

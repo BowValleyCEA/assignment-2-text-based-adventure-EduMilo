@@ -111,38 +111,27 @@ namespace game1402_a2_starter
             switch (input[1])
             {
                 case "north":
-                    if (_currRoom.Directions[0] != "0")
-                    {
-                        reference = _currRoom.Directions[0];
-                    }
+                        reference = _currRoom.North;
                     break;
 
                 case "east":
-                    if (_currRoom.Directions[1] != "0")
-                    {
-                        reference = _currRoom.Directions[1];
-                    }
+                        reference = _currRoom.East;
                     break;
 
                 case "south":
-                    if (_currRoom.Directions[2] != "0")
-                    {
-                        reference = _currRoom.Directions[2];
-                    }
+                        reference = _currRoom.South;
                     break;
 
                 case "west":
-                    if (_currRoom.Directions[3] != "0")
-                    {
-                        reference = _currRoom.Directions[3];
-                    }
+                        reference = _currRoom.West;
                     break;
             }
 
-            if (reference.Length > 0)
+            //if reference was set to a valid value, AND was not set to "0", traverse to that room.
+            if (reference.Length > 0 && !reference.Equals("0"))
             {
                 _currRoom = _gameData.Rooms.Find(x => x.Reference == reference); 
-                response = "You went north. \n" + _currRoom.Description;
+                response = "You went " + input[1]+ ".\n" + _currRoom.Description;
             } else
             {
                 response = "You can't go " + input[1];

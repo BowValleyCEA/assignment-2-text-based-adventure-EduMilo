@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel;
+
 namespace game1402_a2_starter
 {
     [Serializable] //the [Serializable] attribute will be needed if you ever want to save this info
@@ -15,6 +17,7 @@ namespace game1402_a2_starter
         public string South { get; set; }
         public string West {  get; set; }
 
+        public List<StaticItem> StaticItems { get; set; }
         
         public string GetDescription()
         {

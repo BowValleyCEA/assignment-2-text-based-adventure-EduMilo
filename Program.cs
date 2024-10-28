@@ -10,7 +10,7 @@ string jsonString = File.ReadAllText(@fileName);
 yourGameData = JsonSerializer.Deserialize<GameData>(jsonString);
 Game yourGame = new Game(yourGameData);
 
-yourGame.Init();
+yourGame.Init(); //initialize game
 
 while (true)
 {

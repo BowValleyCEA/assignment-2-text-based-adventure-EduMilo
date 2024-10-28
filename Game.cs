@@ -27,9 +27,7 @@ namespace game1402_a2_starter
 
             string[] commands = enteredString.Split(" "); //split based on spaces. The length of this array will tell you whether you have 1, 2, 3, 4, or more commands.
                                                           //modify these functions however you want, but this is where the beginning of calling functions to handle where you are
-            string response = string.Empty;
-
-            response = CommandParse(commands);
+            string response = CommandParse(commands);
             
             Console.WriteLine(response); //what you tell the person after what they entered has been processed
         }
@@ -46,11 +44,14 @@ namespace game1402_a2_starter
                     Console.Clear();
                     response = _currRoom.GetDescription();
                     break;
+                case "inspect":
                 case "investigate":
-                    //List out objects you can interact with!
+                    //List out objects you can interact with, 
+                    response = InspectCommand(input);
                     break;
                 case "use":
                     //use item code!
+                    response = UseCommand(input);
                     break;
                 case "go":
                     response = GoCommand(input);
@@ -90,11 +91,16 @@ namespace game1402_a2_starter
             }
 
             //if reference was set to a valid value, AND was not set to "0" or 1, traverse to that room.
-            if (reference.Length > 0 && !reference.Equals("0") && !reference.Equals("1"))
+
+            bool refIsLocked = reference.Equals("1"); 
+            bool refIsInvalid = reference.Equals("0");
+            bool refExists = reference.Length > 0;
+
+            if (refExists && !refIsInvalid && !refIsLocked)
             {
                 _currRoom = _gameData.Rooms.Find(x => x.Reference == reference); 
                 response = "You went " + input[1]+ ".\n" + _currRoom.GetDescription();
-            } else if(reference.Equals(1))
+            } else if(refIsLocked)
             {
                 response = "That way is locked!";
             } else
@@ -105,6 +111,33 @@ namespace game1402_a2_starter
             return response;
         }
 
+        private string InspectCommand(string[] input)
+        {
+            if(input.Length > 1)
+            {
+                // return description of the specific object
+            } else
+            {
+                // return list of all objects in the room you can interact with.
+            }
+
+            return "";
+        }
+
+        private string UseCommand(string[] input)
+        {
+            string inputName = input[1];
+            var item = _currRoom.StaticItems.Find(x => x.Name == inputName);
+
+            if (item != null)
+            {
+                return item.Use(_gameData);
+            } else
+            {
+                return "There is no " + inputName + " in this room!";
+            }
+
+        }
     }
 
 

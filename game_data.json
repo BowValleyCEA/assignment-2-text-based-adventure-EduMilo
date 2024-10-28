@@ -9,6 +9,18 @@
       "Reference": "starting_room",
       "Description": [ "You are standing in an empty room, perfect for starting. There is a door to the north."],
       "State": 0,
+      "StaticItems": [
+        {
+          "Name": "testitem",
+          "Type": 0,
+          "UseText": "You used the test item!",
+          "Reference": "test_item",
+          "Description": [ "Test description" ],
+          "State": 0,
+          "TargetRoom": "",
+          "TargetState": -1
+        }
+      ],
       "North": "living_room",
       "East": "0",
       "South": "0",

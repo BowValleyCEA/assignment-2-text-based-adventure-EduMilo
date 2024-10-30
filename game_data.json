@@ -1,7 +1,7 @@
 {
   "GameName": "Venusian TPK",
   "Description": "Some game description for Assignment 2",
-  "Help": "Here's the commands you can use:\nhelp - Shows list of commands.\nclear - clears the console and re-prints the description of where you are.\ninspect - Lists the objects in the room you may interact with.\ninspect X - inspect X object.\nuse X - interact with X object.\ninventory - lists the items in your inventory.\nuse X on Y - use X object on Y object.\ngrab X - add X object to your inventory",
+  "Help": "Here's the commands you can use:\nhelp - Shows list of commands.\nclear - clears the console and re-prints the description of where you are.\ninspect - Lists the objects in the room you may interact with.\ninspect X - inspect X object.\nuse X - interact with X object.\ninventory - lists the items in your inventory.\nuse X on Y - use X object on Y object.\ngrab X - add X object to your inventory\nturn X on/off - set an item as 'on' or 'off'",
   "Invalid": "I don't know what that means! Use 'help' to see a list of valid commands.",
   "Rooms": [
     {
@@ -13,16 +13,7 @@
         {
           "Name": "Lamp",
           "Type": 0,
-          "UseText": "",
-          "Reference": "lamp",
-          "Description": [ "A lamp. It is currently off", "A lamp. It is now on and buzzing." ],
-          "State": 0,
-          "TargetReference": "",
-          "TargetState": -1
-        },
-        {
-          "Name": "Lamp",
-          "Type": 0,
+          "Toggleable" : true,
           "UseText": "",
           "Reference": "lamp",
           "Description": [ "A lamp. It is currently off", "A lamp. It is now on and buzzing." ],
@@ -35,21 +26,12 @@
         {
           "Name": "Remote",
           "Type": 2,
+          "Toggleable": false,
           "UseText": "You clicked the remote and the Lamp turned on!",
           "Reference": "remote",
           "Description": [ "A regular lookin remote", "A used, all broken-lookin remote" ],
           "State": 0,
-          "TargetReference": "lamp",
-          "TargetState": 1
-        },
-        {
-          "Name": "Chocolate",
-          "Type": 0,
-          "UseText": "You ate the chocolate and got chocolate everywhere!",
-          "Reference": "chocolate",
-          "Description": [ "A small chocolate bar", "A melty, nasty old piece of chocolate" ],
-          "State": 0,
-          "TargetReference": "starting_room",
+          "TargetReference": "fridge",
           "TargetState": 1
         }
       ],
@@ -61,9 +43,21 @@
     {
       "Name": "Living Room",
       "Reference": "living_room",
-      "Description": [ "You are standing in a place where people live, I guess. The starting room is to the south, and the dining room is to the east."],
+      "Description": [ "You are standing in a place where people live, I guess. The starting room is to the south, and the dining room is to the east." ],
       "State": 0,
-      "StaticItems": [],
+      "StaticItems": [
+        {
+          "Name": "Fridge",
+          "Type": 0,
+          "Toggleable": false,
+          "UseText": "",
+          "Reference": "fridge",
+          "Description": [ "A fridge. It is currently off", "Fridge is now on" ],
+          "State": 0,
+          "TargetReference": "",
+          "TargetState": -1
+        }
+      ],
       "GrabbableItems": [],
       "North": "",
       "East": "dining_room",
@@ -82,5 +76,8 @@
       "South": "",
       "West": "living_room"
     }
-  ]
+  ],
+  "WinItemRef": "fridge",
+  "WinItemState": 1,
+  "WinMessage": "You won!"
 }

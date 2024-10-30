@@ -12,7 +12,7 @@ Game yourGame = new Game(yourGameData);
 
 yourGame.Init(); //initialize game
 
-while (true)
+while (!yourGame.gameIsWon)
 {
     yourGame.ProcessString(Console.ReadLine());
 }

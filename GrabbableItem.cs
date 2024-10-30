@@ -13,11 +13,11 @@
                 case ItemType.RoomChanger:
                     //check if this item has a targetRoom
                     bool hasTarget = (TargetReference != "" && TargetState != -1);
-                    if (!hasTarget) return "DEBUG - Item does not have target and target state!";
+                    if (!hasTarget) return "JSON MISTAKE - Item does not have target and target state!";
 
                     //check if targetRoom is null before changing the state.
                     var tr = gameData.Rooms.Find(x => x.Reference == TargetReference);
-                    if (tr == null) return "DEBUG - RoomChanger could not find target room!";
+                    if (tr == null) return "JSON MISTAKE - RoomChanger could not find target room!";
                     tr.State = TargetState;
 
                     //set this item as used, then make it a descriptor.
@@ -56,7 +56,7 @@
                     return UseText;
                 default:
                     //type was invalid
-                    return "DEBUG - Item " + Name + " did not have valid type!";
+                    return "JSON MISTAKE - Item " + Name + " did not have valid type!";
 
 
             }

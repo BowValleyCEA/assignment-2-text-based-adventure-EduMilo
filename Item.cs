@@ -9,6 +9,7 @@ namespace game1402_a2_starter
 
         public string Name { get; set; }
         public ItemType Type { get; set; }
+        public bool Toggleable { get; set; }
         public string UseText { get; set; }
         public string Reference { get; set; }
         public string[] Description { get; set; }

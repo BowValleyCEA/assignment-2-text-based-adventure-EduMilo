@@ -10,6 +10,11 @@ namespace game1402_a2_starter
         public List<Room> Rooms { get; set; } //this is only an example.
         public string Help {  get; set; } 
         public string Invalid {  get; set; }
+
+        //these two are used to check if the "win item" has been set to the "winning state", thus ending the game.
+        public string WinItemRef { get; set; }
+        public int WinItemState {  get; set; }
+        public string WinMessage {  get; set; }
     }
 
     public class Game(GameData data)
@@ -17,6 +22,7 @@ namespace game1402_a2_starter
         private GameData _gameData = data;
         private Room _currRoom; //the room the player is standing in.
         private List<GrabbableItem> _inventory = new List<GrabbableItem>(); //the inventory of the player.
+        public bool gameIsWon = false; // has the game been won!
 
         //Gameplay Functions
         public void Init()
@@ -60,13 +66,40 @@ namespace game1402_a2_starter
                 case "inventory":
                     response = InventoryCommand(input);
                     break;
+                case "turn":
+                    response = TurnCommand(input);
+                    break;
                 default:
                     response = _gameData.Invalid;
                     break;
             }
+            //check for win.
+            CheckWin();
+            if (gameIsWon)
+            {
+                return _gameData.WinMessage; //ya won!
+            }
             return response;
         }
-        
+
+        private void CheckWin()
+        {
+            //first, check for duplicates
+            if (HasDuplicates(_gameData.WinItemRef))
+            {
+                Console.WriteLine("JSON MISTAKE: There are multiple win items!");
+            }
+
+            //search for Win item!
+            foreach (Item i in GetAllItems())
+            {
+                if(i.Reference == _gameData.WinItemRef && i.State == _gameData.WinItemState)
+                {
+                    gameIsWon = true;
+                }
+            }
+        }
+
         //Command Functions
         private string HelpCommand(string[] input)
         {
@@ -140,6 +173,11 @@ namespace game1402_a2_starter
         }
         private string InventoryCommand(string[] input)
         {
+            if(input.Length != 1)
+            {
+                return "'inventory' is only typed by itself. Example: 'inventory'";
+            }
+
             StringBuilder sb = new StringBuilder();
             sb.Append("Items in your inventory:\n");
             foreach (Item i in _inventory)
@@ -185,7 +223,7 @@ namespace game1402_a2_starter
             //check for duplicate items.
             if (HasDuplicates(input[1]))
             {
-                return "JSON MISTAKE: " + input[1] + " has duplicates of different types!";
+                return "JSON MISTAKE: " + input[1] + " has duplicates!";
             }
 
             //now check if item exists. if it does, return it's description.
@@ -195,6 +233,48 @@ namespace game1402_a2_starter
                 return "There is no " + input[1] + " in this room!";
             }
                 return toBeInspected.Describe();
+        }
+        private string TurnCommand(string[] input)
+        {
+            //turn only works with three arguments! "Turn X On
+            if (input.Length != 3 || (input[2] == "on" || input[2] == "off"))
+            {
+                return "Turn is only used in the format 'turn X on' or 'turn X off";
+            }
+
+            //check for duplicates
+            if (HasDuplicates(input[1]))
+            {
+                return "JSON MISTAKE: " + input[1] + " has duplicates!";
+            }
+
+            //find the object
+            var toBeTurned = FindItem(input[1]);
+
+            //check for null
+            if (toBeTurned == null)
+            {
+                return "There is no " + input[1] + " in this room!";
+            }
+
+            //if item exists, check if its toggleable
+            if (!toBeTurned.Toggleable)
+            {
+                return "You cant 'turn' " + toBeTurned.Name + " " + input[2] + ".";
+            }
+
+            switch (input[2])
+            {
+                case "on":
+                    toBeTurned.State = 1;
+                    return toBeTurned.Name + " was turned on!";
+                case "off":
+                    toBeTurned.State = 0;
+                    return toBeTurned.Name + " was turned off!";
+                default:
+                    //since we already checked for this, this should never return.
+                    return "ERROR: TRIED TO TURN TO INVALID TYPE!";
+            }
         }
         private string UseCommand(string[] input)
         {
@@ -220,14 +300,20 @@ namespace game1402_a2_starter
             {
                 return "There is no " + input[1] + " in this room!";
             }
+
+            //if the object is toggleable, tell the player!
+            if (toBeUsed.Toggleable)
+            {
+                return "To use this object, use the 'turn' command! Example: 'turn " + toBeUsed.Reference + " on.'";
+            }
             return toBeUsed.Use(_gameData, _currRoom, input);
         }
         private string GrabCommand(string[] input)
         {
             //check validity of use
-            if (!IsValidLength(2, input))
+            if (!IsValidLength(2, input) || input.Length == 1)
             {
-                return "'grab' is used with at most one argument. Examples: 'grab', 'grab flashlight'";
+                return "'grab' is used with one argument. Examples: 'grab apple', 'grab flashlight'";
             }
 
             //check for duplicates
@@ -275,9 +361,14 @@ namespace game1402_a2_starter
         }
         private bool HasDuplicates(string itemRef)
         {
+            int count = 0;
             foreach (var item in GetAllItems())
             {
                 if(item.Reference == itemRef)
+                {
+                    count++;
+                }
+                if(count > 1)
                 {
                     return true;
                 }

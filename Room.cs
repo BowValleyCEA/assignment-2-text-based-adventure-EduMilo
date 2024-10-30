@@ -9,7 +9,6 @@ namespace game1402_a2_starter
         public string Name { get; set; }
         public string Reference { get; set; }
         public string[] Description { get; set; } // list of descriptions assigned to the state.
-        
         public int State { get; set; } //state in the room, used for rooms that change over time.
 
         public string North { get; set; }
@@ -18,6 +17,7 @@ namespace game1402_a2_starter
         public string West {  get; set; }
 
         public List<StaticItem> StaticItems { get; set; }
+        public List<GrabbableItem> GrabbableItems { get; set; }
         
         public string GetDescription()
         {

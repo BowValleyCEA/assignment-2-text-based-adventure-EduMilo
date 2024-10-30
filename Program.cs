@@ -16,3 +16,4 @@ while (true)
 {
     yourGame.ProcessString(Console.ReadLine());
 }
+

@@ -1,49 +1,65 @@
 {
-  "GameName": "Assignment 2",
+  "GameName": "Venusian TPK",
   "Description": "Some game description for Assignment 2",
-  "Help": "Here's the commands you can use: \nhelp - Shows list of commands.\nclear - clears the console and re-prints the description of where you are.\ninvestigate - Lists the objects in the room you may interact with.\nuse X - interact with X object.",
-  "Invalid": "That make no dang sense",
+  "Help": "Here's the commands you can use:\nhelp - Shows list of commands.\nclear - clears the console and re-prints the description of where you are.\ninspect - Lists the objects in the room you may interact with.\ninspect X - inspect X object.\nuse X - interact with X object.\nuse X on Y - use X object on Y object.\ngrab X - add X object to your inventory",
+  "Invalid": "I don't know what that means! Use 'help' to see a list of valid commands.",
   "Rooms": [
     {
       "Name": "Starting Room",
       "Reference": "starting_room",
-      "Description": [ "You are standing in an empty room, perfect for starting. There is a door to the north."],
+      "Description": [ "You are standing in an empty room, perfect for starting. There is a button on the wall beside a door to the north.", "You are standing in an empty room, perfect for starting. There is a button on the wall beside a door to the north. The lights are on." ],
       "State": 0,
       "StaticItems": [
         {
-          "Name": "testitem",
+          "Name": "Lamp",
           "Type": 0,
-          "UseText": "You used the test item!",
-          "Reference": "test_item",
-          "Description": [ "Test description" ],
+          "UseText": "",
+          "Reference": "lamp",
+          "Description": [ "A lamp. It is currently off", "A lamp. It is now on and buzzing." ],
           "State": 0,
-          "TargetRoom": "",
+          "TargetReference": "",
           "TargetState": -1
         }
       ],
+      "GrabbableItems": [
+        {
+          "Name": "Remote",
+          "Type": 2,
+          "UseText": "You clicked the remote and the Lamp turned on!",
+          "Reference": "remote",
+          "Description": [ "A regular lookin remote", "A used, all broken-lookin remote" ],
+          "State": 0,
+          "TargetReference": "lamp",
+          "TargetState": 1
+        }
+      ],
       "North": "living_room",
-      "East": "0",
-      "South": "0",
-      "West": "0"
+      "East": "",
+      "South": "",
+      "West": ""
     },
     {
       "Name": "Living Room",
       "Reference": "living_room",
-      "Description": [ "You are standing in a place where people live, I guess. The starting room is to the south, and the dining room is to the east. A locked door is to the north"],
+      "Description": [ "You are standing in a place where people live, I guess. The starting room is to the south, and the dining room is to the east."],
       "State": 0,
-      "North": "1",
+      "StaticItems": [],
+      "GrabbableItems": [],
+      "North": "",
       "East": "dining_room",
       "South": "starting_room",
-      "West": "0"
+      "West": ""
     },
     {
       "Name": "Dining Room",
       "Reference": "dining_room",
       "Description": [ "You are standing in a dining for rooms" ],
       "State": 0,
-      "North": "0",
-      "East": "0",
-      "South": "0",
+      "StaticItems": [],
+      "GrabbableItems": [],
+      "North": "",
+      "East": "",
+      "South": "",
       "West": "living_room"
     }
   ]

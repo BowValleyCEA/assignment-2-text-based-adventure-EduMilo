@@ -1,59 +1,52 @@
-﻿namespace game1402_a2_starter
+﻿using System.Net.Security;
+
+namespace game1402_a2_starter
 {
     [Serializable]
-    public class StaticItem
+    public class StaticItem : Item
     {
-        //Out of headaches from trying to deserialize child classes from JSON, all item functions are now collapsed into this one big ol class.
-        public string Name { get; set; }
-        public ItemType Type { get; set; }
-
-        public string UseText { get; set; }
-        public string Reference {  get; set; }
-        public string[] Description { get; set; }
-        public int State { get; set; }
-        public string TargetRoom {  get; set; } 
-        public int TargetState {  get; set; }
-
-        public string Describe()
+        //note, the input parameter is not used by StaticItems, as they never have to check for 'target objects'
+        public override string Use(GameData gameData, Room currRoom, string[] input)
         {
-            return Description[State];
-        }
-        public string Use(GameData gameData)
-        {
-            
+            //if item has already been used, simply return it's second description and do no further actions.
+            if(State == 1)
+            {
+                return Describe();
+            }
 
             switch (Type)
             {
                 case ItemType.Descriptor:
-                    return "You can't 'use' the " + Name;
-                case ItemType.Toggler:
-                    bool hasTarget = (TargetRoom != "" && TargetState != -1);
-                    if (!hasTarget) return "DEBUG - Toggler does not have target room and target state!";
-                    
-                    //check if it's null before changing the state.
-                    var tr = gameData.Rooms.Find(x => x.Reference == TargetRoom);
-                    if (tr != null)
+                    return "You can't 'use' the " + Name + ". You CAN inspect it however.";
+                case ItemType.RoomChanger:
+                case ItemType.ItemChanger:
+
+                    //check if this item has a target
+                    bool hasTarget = (TargetReference != "" && TargetState != -1);
+                    if (!hasTarget) return "DEBUG - Item does not have target and target state!";
+
+                    //then change the target's state.
+                    if (Type == ItemType.RoomChanger)
                     {
+                        //check if it's null before changing the state.
+                        var tr = gameData.Rooms.Find(x => x.Reference == TargetReference);
+                        if (tr == null) return "DEBUG - RoomChanger could not find target room!";
                         tr.State = TargetState;
                     }
                     else
                     {
-                        //couldn't find targetRoom, do not use object!
-                        return "DEBUG - Could not find target room!";
+                        var tr = currRoom.StaticItems.Find(x => x.Reference == TargetReference);
+                        if (tr == null) return "DEBUG - ItemChanger could not find target item!";
+                        tr.State = TargetState;
                     }
+
+                    //set this item as used
+                    State = 1;
                     return UseText;
                 default:
-                    return "DEBUG - Item did not have valid type!";
+                    return "DEBUG - Item " + Name + "did not have valid type!";
             }
         }
-
-        public enum ItemType
-        {
-            Descriptor,
-            Toggler
-            
-        }
-        
 
 
     }

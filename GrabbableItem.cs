@@ -57,8 +57,6 @@
                 default:
                     //type was invalid
                     return "JSON MISTAKE - Item " + Name + " did not have valid type!";
-
-
             }
         }
     }

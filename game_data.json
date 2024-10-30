@@ -1,13 +1,13 @@
 {
   "GameName": "Venusian TPK",
   "Description": "Some game description for Assignment 2",
-  "Help": "Here's the commands you can use:\nhelp - Shows list of commands.\nclear - clears the console and re-prints the description of where you are.\ninspect - Lists the objects in the room you may interact with.\ninspect X - inspect X object.\nuse X - interact with X object.\ninventory - lists the items in your inventory.\nuse X on Y - use X object on Y object.\ngrab X - add X object to your inventory\nturn X on/off - set an item as 'on' or 'off'",
+  "Help": "Here's the commands you can use:\nhelp - Shows list of commands.\nclear - clears the console and re-prints the description of where you are.\ninspect - Lists the objects in the room you may interact with.\ninspect X - inspect X object.\nuse X - interact with X object.\ninventory - lists the items in your inventory.\nuse X on Y - use X object on Y object.\ntake X - add X object to your inventory\nturn X on/off - set an item as 'on' or 'off'",
   "Invalid": "I don't know what that means! Use 'help' to see a list of valid commands.",
   "Rooms": [
     {
       "Name": "Starting Room",
       "Reference": "starting_room",
-      "Description": [ "You are standing in an empty room, perfect for starting. There is a button on the wall beside a door to the north.", "You are standing in an empty room, perfect for starting. There is a button on the wall beside a door to the north. You can still taste chocolate" ],
+      "Description": [ "You are standing in an empty room, perfect for starting. There is a lamp, and a remote on the floor.", "You are standing in an empty room, perfect for starting. There is a button on the wall beside a door to the north. You can still taste chocolate" ],
       "State": 0,
       "StaticItems": [
         {

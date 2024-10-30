@@ -60,8 +60,8 @@ namespace game1402_a2_starter
                 case "go":
                     response = GoCommand(input);
                     break;
-                case "grab":
-                    response = GrabCommand(input);
+                case "take":
+                    response = TakeCommand(input);
                     break;
                 case "inventory":
                     response = InventoryCommand(input);
@@ -81,7 +81,6 @@ namespace game1402_a2_starter
             }
             return response;
         }
-
         private void CheckWin()
         {
             //first, check for duplicates
@@ -237,7 +236,7 @@ namespace game1402_a2_starter
         private string TurnCommand(string[] input)
         {
             //turn only works with three arguments! "Turn X On
-            if (input.Length != 3 || (input[2] == "on" || input[2] == "off"))
+            if (input.Length != 3 || (input[2] != "on" && input[2] != "off"))
             {
                 return "Turn is only used in the format 'turn X on' or 'turn X off";
             }
@@ -308,12 +307,12 @@ namespace game1402_a2_starter
             }
             return toBeUsed.Use(_gameData, _currRoom, input);
         }
-        private string GrabCommand(string[] input)
+        private string TakeCommand(string[] input)
         {
             //check validity of use
             if (!IsValidLength(2, input) || input.Length == 1)
             {
-                return "'grab' is used with one argument. Examples: 'grab apple', 'grab flashlight'";
+                return "'take' is used with one argument. Examples: 'take apple', 'take flashlight'";
             }
 
             //check for duplicates
@@ -334,7 +333,7 @@ namespace game1402_a2_starter
             //if it's a static item, tell the player they cannot grab it.
             if (toBeGrabbed is StaticItem)
             {
-                return "You cant grab the " + input[1] + "! It's too big!";
+                return "You cant take the " + input[1] + "! It's too big!";
             }
 
             //now that we know it must be a GrabbableItem, cast it, remove it from the grabbableList, and add it to your inventory.

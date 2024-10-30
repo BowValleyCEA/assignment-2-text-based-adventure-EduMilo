@@ -8,12 +8,7 @@ namespace game1402_a2_starter
         //note, the input parameter is not used by StaticItems, as they never have to check for 'target objects'
         public override string Use(GameData gameData, Room currRoom, string[] input)
         {
-            //if item has already been used, simply return it's second description and do no further actions.
-            if(State == 1)
-            {
-                return Describe();
-            }
-
+            //determine behavior based on type.
             switch (Type)
             {
                 case ItemType.Descriptor:
@@ -40,8 +35,10 @@ namespace game1402_a2_starter
                         tr.State = TargetState;
                     }
 
-                    //set this item as used
+                    //set this item as used, then make it a descriptor.
+                    //that way, it can both no-longer be used AND have a new description.
                     State = 1;
+                    Type = ItemType.Descriptor;
                     return UseText;
                 default:
                     return "DEBUG - Item " + Name + "did not have valid type!";

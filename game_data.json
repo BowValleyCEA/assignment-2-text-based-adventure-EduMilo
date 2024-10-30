@@ -7,7 +7,7 @@
     {
       "Name": "Starting Room",
       "Reference": "starting_room",
-      "Description": [ "You are standing in an empty room, perfect for starting. There is a button on the wall beside a door to the north.", "You are standing in an empty room, perfect for starting. There is a button on the wall beside a door to the north. The lights are on." ],
+      "Description": [ "You are standing in an empty room, perfect for starting. There is a button on the wall beside a door to the north.", "You are standing in an empty room, perfect for starting. There is a button on the wall beside a door to the north. You can still taste chocolate" ],
       "State": 0,
       "StaticItems": [
         {
@@ -30,6 +30,16 @@
           "Description": [ "A regular lookin remote", "A used, all broken-lookin remote" ],
           "State": 0,
           "TargetReference": "lamp",
+          "TargetState": 1
+        },
+        {
+          "Name": "Chocolate",
+          "Type": 1,
+          "UseText": "You ate the chocolate and got chocolate everywhere!",
+          "Reference": "chocolate",
+          "Description": [ "A small chocolate bar", "A melty, nasty old piece of chocolate" ],
+          "State": 0,
+          "TargetReference": "starting_room",
           "TargetState": 1
         }
       ],

@@ -130,7 +130,7 @@ namespace game1402_a2_starter
             var foundRoom = _gameData.Rooms.Find(x => x.Reference == reference);
             if(foundRoom == null)
             {
-                return "DEBUG: attempted to traverse to nonexistent room. (incorrect reference name?)";
+                return "JSON MISTAKE: attempted to traverse to nonexistent room. (incorrect reference name?)";
             } 
 
             //change room, clear console, then return room description
@@ -185,7 +185,7 @@ namespace game1402_a2_starter
             //check for duplicate items.
             if (HasDuplicates(input[1]))
             {
-                return "DEBUG: " + input[1] + " has duplicates of different types!";
+                return "JSON MISTAKE: " + input[1] + " has duplicates of different types!";
             }
 
             //now check if item exists. if it does, return it's description.
@@ -211,7 +211,7 @@ namespace game1402_a2_starter
             //check duplicates
             if (HasDuplicates(input[1]))
             {
-                return "DEBUG: " + input[1] + " has duplicates of different types!";
+                return "JSON MISTAKE: " + input[1] + " has duplicates!";
             }
 
             //now check if item exists. if it does, return it's use message.
@@ -233,7 +233,7 @@ namespace game1402_a2_starter
             //check for duplicates
             if (HasDuplicates(input[1]))
             {
-                return "DEBUG: " + input[1] + " has duplicates of different types!";
+                return "JSON MISTAKE: " + input[1] + " has duplicates!";
             }
 
             //find the object in the room, excluding inventory items.
@@ -275,17 +275,14 @@ namespace game1402_a2_starter
         }
         private bool HasDuplicates(string itemRef)
         {
-            //search StaticItems, GrabbableItems, and Inventory for the object.
-            var staticItem = _currRoom.StaticItems.Find(x => x.Reference == itemRef);
-            var grabbableItem = _currRoom.GrabbableItems.Find(x => x.Reference == itemRef);
-            var inventoryItem = _inventory.Find(x => x.Reference == itemRef);
-
-            //this is a very unfortunate way of checking for duplicates. THANKS JSON!
-            bool AreThereDuplicates = (staticItem != null && grabbableItem != null);
-            AreThereDuplicates = AreThereDuplicates || (grabbableItem != null && inventoryItem != null);
-            AreThereDuplicates = AreThereDuplicates || (inventoryItem != null && staticItem != null);
-
-            return AreThereDuplicates;
+            foreach (var item in GetAllItems())
+            {
+                if(item.Reference == itemRef)
+                {
+                    return true;
+                }
+            }
+            return false;
 
         }
         private List<Item> GetAllItems()

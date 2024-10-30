@@ -3,7 +3,6 @@
     [Serializable]
     public class GrabbableItem : Item
     {
-    
         public override string Use(GameData gameData, Room currRoom, string[] input)
         {
             //determine behavior based on type.
@@ -21,8 +20,10 @@
                     if (tr == null) return "DEBUG - RoomChanger could not find target room!";
                     tr.State = TargetState;
 
-                    //set this item as used
+                    //set this item as used, then make it a descriptor.
+                    //that way, it can both no-longer be used AND have a new description.
                     State = 1;
+                    Type = ItemType.Descriptor;
                     return UseText;
                 case ItemType.ItemChanger:
                     //if player simply typed in "use X", tell them it must be used on something.

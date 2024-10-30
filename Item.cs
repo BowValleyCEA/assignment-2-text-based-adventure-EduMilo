@@ -19,16 +19,14 @@ namespace game1402_a2_starter
         {
             if(State >= Description.Length)
             {
-                return "DEBUG: ITEM TRIED TO LOAD A DESCRIPTION OUT OF BOUNDS!";
+                return "JSON MISTAKE: " + Name + " tried to load a description out of bounds.";
             }
             return Description[State];
         }
-
         public virtual string Use(GameData gameData, Room currRoom, String[] input)
         {
-            return "DEBUG: TRIED TO LOAD (use) FROM THE PARENT ITEM CLASS!";
+            return "JSON MISTAKE: " + Name + "was initalized as the parent Item class!";
         }
-
         public enum ItemType
         {
             Descriptor,

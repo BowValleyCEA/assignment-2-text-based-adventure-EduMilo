@@ -8,7 +8,7 @@ namespace game1402_a2_starter
         //note, the input parameter is not used by StaticItems, as they never have to check for 'target objects'
         public override string Use(GameData gameData, Room currRoom, string[] input)
         {
-            //determine behavior based on type.
+
             switch (Type)
             {
                 case ItemType.Descriptor:
@@ -18,20 +18,20 @@ namespace game1402_a2_starter
 
                     //check if this item has a target
                     bool hasTarget = (TargetReference != "" && TargetState != -1);
-                    if (!hasTarget) return "DEBUG - Item does not have target and target state!";
+                    if (!hasTarget) return "JSON MISTAKE - Item does not have target and target state!";
 
                     //then change the target's state.
                     if (Type == ItemType.RoomChanger)
                     {
                         //check if it's null before changing the state.
                         var tr = gameData.Rooms.Find(x => x.Reference == TargetReference);
-                        if (tr == null) return "DEBUG - RoomChanger could not find target room!";
+                        if (tr == null) return "JSON MISTAKE - RoomChanger could not find target room!";
                         tr.State = TargetState;
                     }
                     else
                     {
                         var tr = currRoom.StaticItems.Find(x => x.Reference == TargetReference);
-                        if (tr == null) return "DEBUG - ItemChanger could not find target item!";
+                        if (tr == null) return "JSON MISTAKE - ItemChanger could not find target item!";
                         tr.State = TargetState;
                     }
 
@@ -41,7 +41,7 @@ namespace game1402_a2_starter
                     Type = ItemType.Descriptor;
                     return UseText;
                 default:
-                    return "DEBUG - Item " + Name + "did not have valid type!";
+                    return "JSON MISTAKE - Item " + Name + "did not have valid type!";
             }
         }
 

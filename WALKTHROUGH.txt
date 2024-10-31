@@ -1,0 +1,19 @@
+WALKTHROUGH:
+>go north
+>use button
+>go north
+>go north
+>go east
+>go north
+>take screwdriver
+>go south
+>go west
+>go south
+>use screwdriver on vent
+
+Notes: 
+If you are looking to see the examples of the different item types, here are some that showcase different functionalities:
+-The button outside which opens the airlock AND changes the 'description' of the room.
+-The photograph in the shuttle, which can be taken into the inventory and inspected wherever.
+-The sink in the dining room, which can be turned ON or OFF.
+-The screwdriver, which can be picked up then used on another object.

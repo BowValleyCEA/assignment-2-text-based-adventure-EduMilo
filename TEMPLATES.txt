@@ -1,0 +1,24 @@
+Templates for Text Adventure Assignment Engine:
+
+  Room:
+      "Reference": "starting_room",
+      "Description": [ "" ],
+      "State": 0,				//this determines which descriptions, and cardinal directions are opened. this way, the room can change through interaction.
+      "StaticItems": [],
+      "GrabbableItems": [],
+      "North": [ "" ],
+      "East": [ "" ],
+      "South": [ "" ],
+      "West": [ "" ]
+
+  Item:							//ITEMS that are not toggleable can only be used once to set a state to a specific value.	
+      "Name": "",
+      "Type": 0,                //0 - Descriptor, 1 - RoomChanger, 2 - ItemChanger. (thanks for making parsing enums from a string annoying JSON!)
+      "Toggleable": false,      
+      "UseText": "",
+      "Reference": "",
+      "Description": [ "" ],
+      "State": 0,				//same as state in room.
+      "TargetReference": "",    //if a changer, it's target item/room
+      "TargetState": 0          //the state it wants to set it's target to
+ 

@@ -6,7 +6,8 @@ namespace game1402_a2_starter
     public class GameData
     {
         public string GameName { get; set; } //This is an example of a property; for whatever reason your serializable data objects will need to be written this way
-        public string Description { get; set; }
+        public string Author { get; set; }
+        public string Introduction { get; set; }
         public List<Room> Rooms { get; set; } //this is only an example.
         public string Help {  get; set; } 
         public string Invalid {  get; set; }
@@ -22,12 +23,22 @@ namespace game1402_a2_starter
         private GameData _gameData = data;
         private Room _currRoom; //the room the player is standing in.
         private List<GrabbableItem> _inventory = new List<GrabbableItem>(); //the inventory of the player.
+        //public bool gameStarted = false; //has the game officially started?
         public bool gameIsWon = false; // has the game been won!
 
         //Gameplay Functions
         public void Init()
         {
-            _currRoom = _gameData.Rooms[0]; //places you in the first room.
+            //first, present introduction.
+            Console.WriteLine(_gameData.GameName);
+            Console.WriteLine("By " + _gameData.Author + "\n");
+            Console.WriteLine(_gameData.Introduction + "\n");
+            Console.WriteLine("PRESS ENTER TO BEGIN!");
+            Console.ReadLine();
+            Console.Clear();
+
+            //gameStarted = true;
+            _currRoom = _gameData.Rooms[0]; //places you in the first room in the JSON file.
             Console.WriteLine(_currRoom.GetDescription()); //describes the room you are standing in for the first time.
         }
         public void ProcessString(string enteredString)
@@ -79,6 +90,7 @@ namespace game1402_a2_starter
             CheckWin();
             if (gameIsWon)
             {
+                Console.Clear();
                 return _gameData.WinMessage; //ya won!
             }
             return response;
@@ -200,7 +212,7 @@ namespace game1402_a2_starter
             if (input.Length == 1)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append("Items you can inspect in this room:\n");
+                sb.Append("Items you can inspect in this area:\n");
                 foreach (Item i in _currRoom.StaticItems)
                 {
                     sb.Append(i.Name);
@@ -212,7 +224,7 @@ namespace game1402_a2_starter
                     sb.Append("\n");
                 }
 
-                sb.Append("Items in your inventory:\n");
+                sb.Append("Items you can inspect in your inventory:\n");
                 foreach(Item i in _inventory)
                 {
                     sb.Append(i.Name);
@@ -231,7 +243,7 @@ namespace game1402_a2_starter
             var toBeInspected = FindItem(input[1]);
             if (toBeInspected == null)
             {
-                return "There is no " + input[1] + " in this room!";
+                return "There is no " + input[1] + " item in this area!";
             }
                 return toBeInspected.Describe();
         }
@@ -255,7 +267,7 @@ namespace game1402_a2_starter
             //check for null
             if (toBeTurned == null)
             {
-                return "There is no " + input[1] + " in this room!";
+                return "There is no " + input[1] + " in this area!";
             }
 
             //if item exists, check if its toggleable
@@ -299,7 +311,7 @@ namespace game1402_a2_starter
             var toBeUsed = FindItem(input[1]);
             if (toBeUsed == null)
             {
-                return "There is no " + input[1] + " in this room!";
+                return "There is no " + input[1] + " in this area!";
             }
 
             //if the object is toggleable, tell the player!

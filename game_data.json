@@ -1,92 +1,330 @@
 {
   "GameName": "Venusian TPK",
-  "Description": "Some game description for Assignment 2",
+  "Author": "Camilo Soto Cordovez",
+  "Introduction": "Sometime in the 3020s, Maritans ran out of wars to fight at home.\nThe Martian economy thrived and food scarcity was no longer an issue.\nThis, of course, was regarded as ‘not good’ by the politicians and big-wigs of Mars.\nIn a matter of years, Mars sent out countless vessels to all corners of the solar system in search of more life to create arbitrary conflict with.\nAboard these vessels were crews of the highest-calibre men the Martian army had to offer.\nThese crews, consisting vastly more of muscle than brain, often vanish into corners of space, costing in millions of Taxpayer Marsbucks being lost.\nTo counteract this economic loss, Mars sends out military inspectors to find these ships and bring back their Vessel Cores.\nYou are one of these inspectors.",
   "Help": "Here's the commands you can use:\nhelp - Shows list of commands.\nclear - clears the console and re-prints the description of where you are.\ninspect - Lists the objects in the room you may interact with.\ninspect X - inspect X object.\nuse X - interact with X object.\ninventory - lists the items in your inventory.\nuse X on Y - use X object on Y object.\ntake X - add X object to your inventory\nturn X on/off - set an item as 'on' or 'off'",
   "Invalid": "I don't know what that means! Use 'help' to see a list of valid commands.",
   "Rooms": [
     {
-      "Reference": "starting_room",
-      "Description": [ "You are standing in an empty room, perfect for starting. There is a lamp, and a remote on the floor.", "You are standing in an empty room, perfect for starting. There is a button on the wall beside a door to the north. You can still taste chocolate" ],
+      "Reference": "shuttle",
+      "Description": [ "You are standing inside your shuttle.\nThe room is dimly lit by the flickering neon tubes that outline the ceiling.\nBeside you is your CRYOPOD, along with a desk.\nLying around are a variety of items you could INSPECT.\nThere is also a TERMINAL that can allow you to head back home.\nTo the NORTH is the opening that leads out to Venus." ],
       "State": 0,
       "StaticItems": [
-        {
-          "Name": "Lamp",
-          "TypeString": 0,
-          "Toggleable" : true,
-          "UseText": "",
-          "Reference": "lamp",
-          "Description": [ "A lamp. It is currently off", "A lamp. It is now on and buzzing." ],
-          "State": 0,
-          "TargetReference": "",
-          "TargetState": -1
-        }
-      ],
+	  {
+		"Name": "CryoPod",
+		"Type": 0,
+		"Toggleable": false,      
+		"UseText": "",
+		"Reference": "cryopod",
+		"Description": [ "This is your place of rest during those pesky decade-long trips.\nYou sure wish Chief would let you style it to look like a racecar." ],
+		"State": 0,
+		"TargetReference": "",    
+		"TargetState": 0 
+	  },
+	  {
+		"Name": "Paperclip",
+		"Type": 0,                
+		"Toggleable": false,      
+		"UseText": "",
+		"Reference": "paperclip",
+		"Description": [ "There’s a paper clip on the desk.\nYou like this paperclip. You think it brings you good luck.\nYou keep it on the desk so it may watch over your shuttle." ],
+		"State": 0,
+		"TargetReference": "",    
+		"TargetState": 0 
+	  },
+	  {
+		"Name": "Terminal",
+		"Type": 0,                
+		"Toggleable": false,      
+		"UseText": "",
+		"Reference": "terminal",
+		"Description": [ "There is a large terminal with a scanning pad on the side.\nOnce you find the Vessel Core, you can use it on the terminal to leave.\nOtherwise, there is no way to interact with the Terminal." ],
+		"State": 0,
+		"TargetReference": "",    
+		"TargetState": 0 
+	  }
+	  ],
       "GrabbableItems": [
-        {
-          "Name": "Remote",
-          "Type": 2,
-          "Toggleable": false,
-          "UseText": "You clicked the remote and the Lamp turned on!",
-          "Reference": "remote",
-          "Description": [ "A regular lookin remote", "A used, all broken-lookin remote" ],
-          "State": 0,
-          "TargetReference": "fridge",
-          "TargetState": 1
-        }
-      ],
-      "North": [ "living_room" ],
+	  {
+		"Name": "Photograph",
+		"Type": 0,                
+		"Toggleable": false,      
+		"UseText": "",
+		"Reference": "photograph",
+		"Description": [ "A photograph of a beautiful woman standing on the side of Hellas Planitia back home.\nShe is winking at the camera with her third eye.\nYou stole it from a body you found once, but you like to pretend it’s your wife.\nIt is signed “To my dearest Dick Drexler” in your own handwriting." ],
+		"State": 0,
+		"TargetReference": "",    
+		"TargetState": 0 
+	  },
+	  {
+		"Name": "Badge",
+		"Type": 0,                
+		"Toggleable": false,      
+		"UseText": "",
+		"Reference": "badge",
+		"Description": [ "Made of copper, it depicts a cute little UFO.\nBelow it, your name “DICK DREXLER” is embossed. \nUnder your name, the title “Military Inspector” is cheaply etched into the metal." ],
+		"State": 0,
+		"TargetReference": "",    
+		"TargetState": 0 
+	  },
+	  {
+		"Name": "Manifest",
+		"Type": 0,                
+		"Toggleable": false,      
+		"UseText": "",
+		"Reference": "manifest",
+		"Description": [ "The manifest contains the list of crewmates on the vessel you are tracking down.\nTheir ranks and names are:\nCaptain Lyle Garfunkel\nPrivate Onson Sweemey\nSwabbie Bobson Dugnutt\nOn the bottom of the manifest, a note is attached. It reads:\n'FIND THE VESSEL CORE, CREW EXPENDABLE - Chief'\nYou should probably keep this Manifest in your inventory." ],
+		"State": 0,
+		"TargetReference": "",    
+		"TargetState": 0 
+	  }
+	  ],
+      "North": [ "outside" ],
       "East": [ "" ],
       "South": [ "" ],
       "West": [ "" ]
     },
     {
-      "Reference": "living_room",
-      "Description": [ "You are standing in a place where people live, I guess. The starting room is to the south, and the dining room is to the east.", "There's now a door to the north that goes to starting room!'" ],
+      "Reference": "outside",
+      "Description": [ "You are standing outside in Venus.\nThe sky is mustard yellow, and the ground is steak sauce brown.\nThe atmosphere is absolutely awful here. Thank goodness for bionic lungs.\nThere is DEBRIS strewn about the rocky surface.\nThe VESSEL is crushed into the ground.\nYour Shuttle is to the SOUTH.\nThe entrance to the vessel’s airlock is to the NORTH. it is shut.\nThere is a BUTTON beside the airlock door to open it.", "You are standing outside in Venus.\nThe sky is mustard yellow, and the ground is steak sauce brown.\nThe atmosphere is absolutely awful here. Thank goodness for bionic lungs.\nThere is DEBRIS strewn about the rocky surface.\nThe VESSEL is crushed into the ground.\nYour Shuttle is to the SOUTH.\nThe entrance to the vessel’s airlock is to the NORTH. it is open." ],
       "State": 0,
       "StaticItems": [
         {
-          "Name": "Fridge",
+          "Name": "Debris",
           "Type": 0,
           "Toggleable": false,
           "UseText": "",
-          "Reference": "fridge",
-          "Description": [ "A fridge. It is currently off", "Fridge is now on" ],
+          "Reference": "debris",
+          "Description": [ "There is debris littered all over the ground.\nNothing worth salvaging." ],
+          "State": 0,
+          "TargetReference": "",
+          "TargetState": -1
+        },
+		{
+		  "Name": "Vessel",
+          "Type": 0,
+          "Toggleable": false,
+          "UseText": "",
+          "Reference": "vessel",
+          "Description": [ "The crashed vessel you’ve been looking for for the past decade is on the ground.\nThe crumpled metal, along with the shards of glass everywhere make it clear this was no smooth landing." ],
+          "State": 0,
+          "TargetReference": "",
+          "TargetState": 0
+		},
+		{
+		  "Name": "Button",
+          "Type": 1,
+          "Toggleable": false,
+          "UseText": "You press the button. The Airlock door to the NORTH is now open.",
+          "Reference": "button",
+          "Description": [ "The button that opens the vessel.", "The button is now pushed in.\nLooks like the button is stuck in there." ],
+          "State": 0,
+          "TargetReference": "outside",
+          "TargetState": 1
+		}
+      ],
+      "GrabbableItems": [],
+      "North": [ "","airlock" ],
+      "East": [ "","" ],
+      "South": [ "shuttle", "shuttle" ],
+      "West": [ "","" ]
+    },
+    {
+      "Reference": "airlock",
+      "Description": [ "You are standing within the airlock of the vessel.\nIt is dark.\nThere is a puddle of blood leading to a VENT on the floor.\nThe hallway continues NORTH towards the Main Quarters.\nSOUTH heads towards your shuttle outside." , "You are standing within the airlock of the vessel.\nIt is dark.\nThe vent has been opened, and you can head EAST into the vent.\nThe hallway continues NORTH towards the Main Quarters.\nSOUTH heads towards your shuttle outside." ],
+      "State": 0,
+      "StaticItems": [
+	    {
+          "Name": "Vent",
+          "Type": 0,
+          "Toggleable": false,
+          "UseText": "",
+          "Reference": "vent",
+          "Description": [ "Something is definitely up with this vent. If only you had a screwdriver to open it up.", "The vent is now on the ground." ],
           "State": 0,
           "TargetReference": "",
           "TargetState": -1
         }
-      ],
-      "GrabbableItems": [
-        {
-          "Name": "RoomChanger",
-          "Type": 1,
-          "Toggleable": false,
-          "UseText": "You click the button and the room changes!",
-          "Reference": "roomchanger",
-          "Description": [ "A button that changes the room", "The button no longer works." ],
-          "State": 0,
-          "TargetReference": "living_room",
-          "TargetState": 1
-        }
-      ],
-      "North": [ "" ],
-      "East": [ "dining_room" ],
-      "South": [ "starting_room" ],
-      "West": [ "" ]
+		],
+      "GrabbableItems": [],
+      "North": [ "mainquarters","mainquarters" ],
+      "East": [ "","" ],
+      "South": [ "outside","outside" ],
+      "West": [ "","" ]
     },
-    {
-      "Reference": "dining_room",
-      "Description": [ "You are standing in a dining for rooms" ],
+	{
+      "Reference": "mainquarters",
+      "Description": [ "You are now standing in the Main Quarters.\nChairs surround a table in the middle.\nOn top of the table is a large CORPSE.\nTo the WEST are the Sleeping Quarters.\nTo the NORTH is the Dining Room.\nTo the EAST is the Engine Room.\nTo the SOUTH is the Airlock." ],
       "State": 0,
-      "StaticItems": [],
+      "StaticItems": [
+	    {
+          "Name": "Corpse",
+          "Type": 0,
+          "Toggleable": false,
+          "UseText": "",
+          "Reference": "corpse",
+          "Description": [ "This is the body of Captain Garfunkle.\nThere doesn’t seem to be anything of value around his body.\nHis body seems to have been bitten real bad.\nBoy is he ugly.\nEr.. was ugly." ],
+          "State": 0,
+          "TargetReference": "",
+          "TargetState": -1
+        }
+		],
+      "GrabbableItems": [],
+      "North": [ "diningroom" ],
+      "East": [ "engineroom" ],
+      "South": [ "airlock" ],
+      "West": [ "sleepingquarters" ]
+    },
+	{
+	  "Reference": "sleepingquarters",
+      "Description": [ "You are now in the Sleeping Quarters.\nThe room is very small and made up of BUNKBEDS.\nThere is a mysterious BOTTLE on the ground.\nTo the EAST are the Main Quarters." ],
+      "State": 0,
+      "StaticItems": [
+	  	{
+          "Name": "Bunkbeds",
+          "Type": 0,
+          "Toggleable": false,
+          "UseText": "",
+          "Reference": "bunkbeds",
+          "Description": [ "Truly the stiffest Bunkbeds you’ve ever seen." ],
+          "State": 0,
+          "TargetReference": "",
+          "TargetState": -1
+        },
+	    {
+          "Name": "Bottle",
+          "Type": 0,
+          "Toggleable": false,
+          "UseText": "",
+          "Reference": "bottle",
+          "Description": [ "There is a bottle on the ground full of a cloudy yellow liquid.\nThere is not a doubt in your mind that it is full of piss." ],
+          "State": 0,
+          "TargetReference": "",
+          "TargetState": -1
+        }
+		],
+	  "GrabbableItems": [],
+      "North": [ "" ],
+      "East": [ "mainquarters" ],
+      "South": [ "" ],
+      "West": [ "" ]
+	},
+	{
+	  "Reference": "diningroom",
+      "Description": [ "You are now standing in the Dining Room.\nChairs surround the dining table.\nThere is a SINK on the wall.\nThere is CEREAL on the table.\nThere is a CORPSE stuffed under the table.\nTo the SOUTH are the Main Quarters." ],
+      "State": 0,
+      "StaticItems": [
+		{
+		  "Name": "Sink",
+          "Type": 0,
+          "Toggleable": true,
+          "UseText": "",
+          "Reference": "sink",
+          "Description": [ "The sink is currently off.", "The sink is currently on." ],
+          "State": 0,
+          "TargetReference": "",
+          "TargetState": -1
+		},
+	  	{
+          "Name": "Cereal",
+          "Type": 0,
+          "Toggleable": false,
+          "UseText": "",
+          "Reference": "cereal",
+          "Description": [ "Somehow, this cereal is burnt.\nLike, the bits of cereal along with the milk are all charred.\nYou’re not sure how milk could even be charred, but you're witnessing it at this very moment." ],
+          "State": 0,
+          "TargetReference": "",
+          "TargetState": -1
+        },
+	    {
+          "Name": "Corpse",
+          "Type": 0,
+          "Toggleable": false,
+          "UseText": "",
+          "Reference": "corpse",
+          "Description": [ "This is the body of Private Sweemey.\nIt looks like something crunched his body up into a cube, and stuffed it under the table.\nThere seems to be nothing of value around his body.\n Wouldn't let that happen to me though." ],
+          "State": 0,
+          "TargetReference": "",
+          "TargetState": -1
+        }
+		],
       "GrabbableItems": [],
       "North": [ "" ],
       "East": [ "" ],
+      "South": [ "mainquarters" ],
+      "West": [ "" ]
+	},
+	{
+	  "Reference": "engineroom",
+      "Description": [ "You are now standing in the Engine Room\nThere are machines, gears, and cables everywhere.\nThere is a CORPSE partially chewed up by the gears on the wall.\nThere is a NOTE on the ground, by the hands of the corpse.\nTo the WEST are the Main Quarters\nTo the NORTH is the Cockpit." ],
+      "State": 0,
+      "StaticItems": [
+	  	{
+          "Name": "Corpse",
+          "Type": 0,
+          "Toggleable": false,
+          "UseText": "",
+          "Reference": "corpse",
+          "Description": [ "This is the body of Engineer Pete.\nFrom the sight, it’s unclear how exactly he ended up getting chewed up by the gears.\nEmbarassing." ],
+          "State": 0,
+          "TargetReference": "",
+          "TargetState": -1
+        },
+	    {
+          "Name": "Note",
+          "Type": 0,
+          "Toggleable": false,
+          "UseText": "",
+          "Reference": "note",
+          "Description": [ "This is a note written on a lined piece of paper. It reads:\n‘There’s a big fuckin alien bangin on the windshield. \nI told Dugnutt to hide in the vent with the Vessel Core until one of you investigator folk show up.\n I am going to step into the engine’s gears now.’\nWow. Pete sure was a poet." ],
+          "State": 0,
+          "TargetReference": "",
+          "TargetState": -1
+        }
+		],
+      "GrabbableItems": [],
+      "North": [ "cockpit" ],
+      "East": [ "" ],
       "South": [ "" ],
-      "West": [ "living_room" ]
-    }
+      "West": [ "mainquarters" ]
+	},
+	{
+	  "Reference": "cockpit",
+      "Description": [ "You are now standing in the Cockpit.\nThere are shards of glass everywhere. It is a mess in here.\nThere is a broken WINDSHIELD over the pilot console.\nThere is a SCREWDRIVER on the floor.\nTo the SOUTH is the Engine Room." ],
+      "State": 0,
+      "StaticItems": [
+	  	{
+          "Name": "Windshield",
+          "Type": 0,
+          "Toggleable": false,
+          "UseText": "",
+          "Reference": "windshield",
+          "Description": [ "The windshield seems to have been burst through from the outside.\nI wonder if that’s where the thing that killed the crew came from…" ],
+          "State": 0,
+          "TargetReference": "",
+          "TargetState": -1
+        }
+		],
+      "GrabbableItems": [
+	  {
+          "Name": "Screwdriver",
+          "Type": 2,
+          "Toggleable": false,
+          "UseText": "You used the screwdriver on the vent and shimmied it open!",
+          "Reference": "screwdriver",
+          "Description": [ "A good ol’ screwdriver.\nHey! You could take this, then bring it over to the airlock and use it on that vent!", "A used screwdriver. Can’t be used again." ],
+          "State": 0,
+          "TargetReference": "vent",
+          "TargetState": 1
+	  }
+	  ],
+      "North": [ "" ],
+      "East": [ "" ],
+      "South": [ "engineroom" ],
+      "West": [ "" ]
+	}
   ],
-  "WinItemRef": "fridge",
+  "WinItemRef": "vent",
   "WinItemState": 1,
-  "WinMessage": "You won!"
+  "WinMessage": "Once you finish shimmying the vent open, you feel a gust of warm, foul air come out from it.\nIf the corpses, broken windshield, and blood around the vent weren’t already bad enough signs, the horrible Venusian beast within the vent sure is.\nIt leaps out from the Vent and catches you in its jaws.\nAs life spills out from your enormous wounds, your last thought materializes within your panicked mind.\n‘Jeez, I wonder what the next inspector is gonna think.’\nTHE END.\n\n\n"
 }

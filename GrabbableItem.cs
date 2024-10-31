@@ -11,14 +11,16 @@
                 case ItemType.Descriptor:
                     return "You can't 'use' the " + Name + ". You CAN inspect it however.";
                 case ItemType.RoomChanger:
+
+                    //note- this can ONLY be used on the room you're in.
                     //check if this item has a targetRoom
                     bool hasTarget = (TargetReference != "" && TargetState != -1);
                     if (!hasTarget) return "JSON MISTAKE - Item does not have target and target state!";
 
-                    //check if targetRoom is null before changing the state.
-                    var tr = gameData.Rooms.Find(x => x.Reference == TargetReference);
-                    if (tr == null) return "JSON MISTAKE - RoomChanger could not find target room!";
-                    tr.State = TargetState;
+                    //correct room?
+                    if (TargetReference != currRoom.Reference) return "This item cannot be used here!";
+
+                    currRoom.State = TargetState;
 
                     //set this item as used, then make it a descriptor.
                     //that way, it can both no-longer be used AND have a new description.

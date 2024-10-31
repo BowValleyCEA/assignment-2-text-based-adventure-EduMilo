@@ -5,14 +5,13 @@
   "Invalid": "I don't know what that means! Use 'help' to see a list of valid commands.",
   "Rooms": [
     {
-      "Name": "Starting Room",
       "Reference": "starting_room",
       "Description": [ "You are standing in an empty room, perfect for starting. There is a lamp, and a remote on the floor.", "You are standing in an empty room, perfect for starting. There is a button on the wall beside a door to the north. You can still taste chocolate" ],
       "State": 0,
       "StaticItems": [
         {
           "Name": "Lamp",
-          "Type": 0,
+          "TypeString": 0,
           "Toggleable" : true,
           "UseText": "",
           "Reference": "lamp",
@@ -35,15 +34,14 @@
           "TargetState": 1
         }
       ],
-      "North": "living_room",
-      "East": "",
-      "South": "",
-      "West": ""
+      "North": [ "living_room" ],
+      "East": [ "" ],
+      "South": [ "" ],
+      "West": [ "" ]
     },
     {
-      "Name": "Living Room",
       "Reference": "living_room",
-      "Description": [ "You are standing in a place where people live, I guess. The starting room is to the south, and the dining room is to the east." ],
+      "Description": [ "You are standing in a place where people live, I guess. The starting room is to the south, and the dining room is to the east.", "There's now a door to the north that goes to starting room!'" ],
       "State": 0,
       "StaticItems": [
         {
@@ -58,23 +56,34 @@
           "TargetState": -1
         }
       ],
-      "GrabbableItems": [],
-      "North": "",
-      "East": "dining_room",
-      "South": "starting_room",
-      "West": ""
+      "GrabbableItems": [
+        {
+          "Name": "RoomChanger",
+          "Type": 1,
+          "Toggleable": false,
+          "UseText": "You click the button and the room changes!",
+          "Reference": "roomchanger",
+          "Description": [ "A button that changes the room", "The button no longer works." ],
+          "State": 0,
+          "TargetReference": "living_room",
+          "TargetState": 1
+        }
+      ],
+      "North": [ "" ],
+      "East": [ "dining_room" ],
+      "South": [ "starting_room" ],
+      "West": [ "" ]
     },
     {
-      "Name": "Dining Room",
       "Reference": "dining_room",
       "Description": [ "You are standing in a dining for rooms" ],
       "State": 0,
       "StaticItems": [],
       "GrabbableItems": [],
-      "North": "",
-      "East": "",
-      "South": "",
-      "West": "living_room"
+      "North": [ "" ],
+      "East": [ "" ],
+      "South": [ "" ],
+      "West": [ "living_room" ]
     }
   ],
   "WinItemRef": "fridge",

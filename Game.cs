@@ -37,7 +37,9 @@ namespace game1402_a2_starter
             string[] commands = enteredString.Split(" "); //split based on spaces. The length of this array will tell you whether you have 1, 2, 3, 4, or more commands.
                                                           //modify these functions however you want, but this is where the beginning of calling functions to handle where you are
             string response = CommandParse(commands);
-            
+
+            //string paddingLine = "  >" + enteredString + "\n";
+
             Console.WriteLine(response); //what you tell the person after what they entered has been processed
         }
         private string CommandParse(string[] input)
@@ -130,22 +132,22 @@ namespace game1402_a2_starter
             {
                 case "north":
                 case "n":
-                        reference = _currRoom.North;
+                        reference = _currRoom.North[_currRoom.State];
                     break;
 
                 case "east":
                 case "e":
-                        reference = _currRoom.East;
+                        reference = _currRoom.East[_currRoom.State];
                     break;
 
                 case "south":
                 case "s":
-                        reference = _currRoom.South;
+                        reference = _currRoom.South[_currRoom.State];
                     break;
 
                 case "west":
                 case "w":
-                        reference = _currRoom.West;
+                        reference = _currRoom.West[_currRoom.State];
                     break;
                 default:
                     return "'go' must be followed by a cardinal direction (north, east, south, west).";

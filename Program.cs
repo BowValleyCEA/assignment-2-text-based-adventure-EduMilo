@@ -14,6 +14,7 @@ yourGame.Init(); //initialize game
 
 while (!yourGame.gameIsWon)
 {
+    Console.Write("\n>");//for formatting purposes
     yourGame.ProcessString(Console.ReadLine());
 }
 
